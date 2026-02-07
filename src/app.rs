@@ -5,6 +5,9 @@ use leptos_router::{
     StaticSegment, WildcardSegment,
 };
 
+use crate::pages::home::HomePage;
+use crate::pages::not_found::NotFound;
+
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
@@ -20,47 +23,12 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <main>
+            <main class="min-h-screen">
                 <Routes fallback=move || "Not found.">
                     <Route path=StaticSegment("") view=HomePage/>
                     <Route path=WildcardSegment("any") view=NotFound/>
                 </Routes>
             </main>
         </Router>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
-    view! {
-        <h1 class="p-2 text-4xl text-blue-500">"Welcome to Leptos!"</h1>
-        <button on:click=on_click class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">"Click Me: " {count}</button>
-    }
-}
-
-/// 404 - Not Found
-#[component]
-fn NotFound() -> impl IntoView {
-    // set an HTTP status code 404
-    // this is feature gated because it can only be done during
-    // initial server-side rendering
-    // if you navigate to the 404 page subsequently, the status
-    // code will not be set because there is not a new HTTP request
-    // to the server
-    #[cfg(feature = "ssr")]
-    {
-        // this can be done inline because it's synchronous
-        // if it were async, we'd use a server function
-        let resp = expect_context::<leptos_actix::ResponseOptions>();
-        resp.set_status(actix_web::http::StatusCode::NOT_FOUND);
-    }
-
-    view! {
-        <h1>"Not Found"</h1>
     }
 }

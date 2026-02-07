@@ -6,6 +6,9 @@
     --font-sans: "Inter", sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-green-500: oklch(72.3% 0.219 149.579);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-white: #fff;
@@ -171,14 +174,48 @@
   .static {
     position: static;
   }
+  .flex {
+    display: flex;
+  }
   .inline {
     display: inline;
+  }
+  .h-screen {
+    height: 100vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-full {
+    width: 100%;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-center {
+    justify-content: center;
+  }
   .rounded {
     border-radius: 0.25rem;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-green-500 {
+    border-color: var(--color-green-500);
+  }
+  .border-red-500 {
+    border-color: var(--color-red-500);
+  }
+  .border-yellow-500 {
+    border-color: var(--color-yellow-500);
   }
   .bg-blue-500 {
     background-color: var(--color-blue-500);
@@ -191,6 +228,9 @@
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
+  }
+  .text-center {
+    text-align: center;
   }
   .text-4xl {
     font-size: var(--text-4xl);
@@ -230,6 +270,11 @@
   syntax: "*";
   inherits: false;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -238,6 +283,7 @@
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
+      --tw-border-style: solid;
     }
   }
 }
