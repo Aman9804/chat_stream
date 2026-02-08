@@ -6,8 +6,13 @@ pub fn HomePage() -> impl IntoView {
     let (invitation_code, set_invitation_code) = signal("".to_string());
 
     let on_submit_code = move |_| {
-        // TODO: Implement invitation code validation logic
-        leptos::logging::log!("Invitation Code Submitted: {}", invitation_code.get());
+        let code = invitation_code.get();
+        if !code.is_empty() {
+            leptos_router::hooks::use_navigate()(
+                &format!("/chat?code={}", code),
+                Default::default(),
+            );
+        }
     };
 
     view! {
