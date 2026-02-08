@@ -35,5 +35,5 @@ jobs:
       - name: Run tests
         run: cargo test
 
-      - name: Build SSR
-        run: cargo leptos build --build-target=ssr
+      - name: Build
+        run: cargo leptos build
